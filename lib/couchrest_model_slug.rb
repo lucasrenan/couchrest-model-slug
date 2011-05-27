@@ -1,0 +1,2 @@
+module CouchrestModelSlug
+end
