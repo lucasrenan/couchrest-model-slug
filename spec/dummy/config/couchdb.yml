@@ -1,0 +1,12 @@
+development: &development
+  protocol: 'http'
+  host: localhost
+  port: 5984
+  prefix: couchrest_model_slug
+  suffix: development
+  username:
+  password:
+
+test:
+  <<: *development
+  suffix: test

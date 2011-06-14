@@ -1,7 +1,13 @@
 require 'spec_helper'
 
-describe Couchrest::Model::Slug do
-  it "should be valid" do
-    Couchrest::Model::Slug.should be_a(Module)
+describe CouchRest::Model::Slug do
+  describe "defining slugs fields" do
+    before(:each) do
+      @post = Factory.build(:post)
+    end
+    
+    it "should has a slug class method" do
+      Post.respond_to?("slug").should be_true
+    end
   end
 end

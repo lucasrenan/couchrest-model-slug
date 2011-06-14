@@ -1,3 +1,11 @@
+begin
+  require 'simplecov'
+  SimpleCov.start("rails") do
+    add_filter '/vendor/'
+  end
+rescue
+end
+
 # Configure Rails Envinronment
 ENV["RAILS_ENV"] = "test"
 
@@ -22,6 +30,10 @@ Capybara.default_selector = :css
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
+# Load factories
+require "factory_girl_rails"
+Dir["#{File.dirname(__FILE__)}/factories/*.rb"].each { |f| require f }
+
 RSpec.configure do |config|
   # Remove this line if you don't want RSpec's should and should_not
   # methods or matchers
@@ -33,5 +45,7 @@ RSpec.configure do |config|
   
   config.color_enabled = true
   config.full_backtrace = true
-
+  
+  config.before(:each) { CouchRest::Model::Base.database.recreate! }
+  config.after(:all) { CouchRest::Model::Base.database.delete! }
 end
