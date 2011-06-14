@@ -7,5 +7,5 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.rdoc"]
   s.version = "0.0.1"
   
-  s.add_dependency "couchrest_model", "1.1.0.beta5"
+  s.add_dependency "couchrest_model", "1.1.0.rc1"
 end
