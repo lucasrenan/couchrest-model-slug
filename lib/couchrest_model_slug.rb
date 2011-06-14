@@ -1,2 +1,1 @@
-module CouchrestModelSlug
-end
+require "couchrest/model/slug"
