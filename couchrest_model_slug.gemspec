@@ -8,4 +8,5 @@ Gem::Specification.new do |s|
   s.version = "0.0.1"
   
   s.add_dependency "couchrest_model", "1.1.0.rc1"
+  s.add_dependency "stringex", "1.2.1"
 end
