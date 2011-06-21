@@ -1,3 +1,54 @@
-= CouchrestModelSlug
+== CouchRest Model Slug
 
-This project rocks and uses MIT-LICENSE.
+CouchRest Model Slug is a simple gem to generate better urls using CouchRest Model in an easy way.
+It's based on Mongoid Slug https://github.com/papercavalier/mongoid-slug
+
+Time to relax with beautiful urls.
+
+== Getting Started
+
+Add to Gemfile
+
+  gem "couchrest_model_slug", "~> 0.0.1"
+  
+A model example
+
+  class Post < CouchRest::Model::Base
+    include CouchRest::Model::Slug
+
+    property :title
+    property :summary
+    property :text
+
+    slug :title, :summary
+  end
+  
+It's all you need to get things working =)
+  
+== Querying
+
+  p = Post.create(:title => "CouchDB", :summary => "Time to relax!")
+  p.to_param # => "couchdb-time-to-relax"
+  
+  Post.find("couchdb-time-to-relax") # =>#<Post slug: "couchdb-time-to-relax", title: "CouchDB"...
+  
+== Special feature
+
+CouchRest Model Slug was made to work with or without slugged value, then it uses the id to keep things running with no problems.
+  
+  Post.create(:text => "post without slug") # => #<Post slug: "", title: nil, summary: nil, text: "post with no slug", _id: "9fdfdd090897680de59091c8c98ff064"...
+  
+  Post.find("9fdfdd090897680de59091c8c98ff064") # => #<Post slug: "", title: nil, summary: nil, text: "post with no slug", _id: "9fdfdd090897680de59091c8c98ff064"...
+  
+== Notes
+
+CouchRest Model Slug automatically adds a property called slug into your model to store the slugged value.
+Then you can call the slug property directly.
+  
+  p = Post.create(:title => "CouchDB", :summary => "Time to relax!")
+  p.slug # => "couchdb-time-to-relax"
+  
+If you want to be more explicit, you can query using find_by_slug magic method:
+
+  Post.find_by_slug("couchdb-time-to-relax") # =>#<Post slug: "couchdb-time-to-relax", title: "CouchDB"...
+  
