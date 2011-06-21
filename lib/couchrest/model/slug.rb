@@ -23,6 +23,11 @@ module CouchRest
       end
       
       module InstanceMethods
+        def to_param
+          result = self.send :slug
+          return super if result.blank?
+          result
+        end
         
         private
         def generate_slug
@@ -43,11 +48,16 @@ module CouchRest
           self.slugged_props = props.map(&:to_s)
         end
         
+        def find(value)
+          self.by_slug(:key => value).first || super(value)
+        end
+        
         def generate_count_for_slug(slug_without_count)
           hash = self.by_slug_without_count(:reduce => true, :group => true, :key => slug_without_count)["rows"].try(:first)
           hash.nil? ? slug_without_count : "#{slug_without_count}-#{hash['value']}"
         end
       end
+      
     end
   end
 end

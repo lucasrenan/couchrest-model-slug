@@ -24,9 +24,7 @@ describe CouchRest::Model::Slug do
   end
   
   describe "generating slugs" do
-    let!(:post) do
-      Factory.create(:post, :title => "CouchDB", :summary => "Time to Relax")
-    end
+    let!(:post) { Factory.create(:post, :title => "CouchDB", :summary => "Time to Relax") }
     
     it "should generates a slug" do
       post.slug.should eq("couchdb-time-to-relax")
@@ -55,7 +53,32 @@ describe CouchRest::Model::Slug do
         p.slug.should eq("couchdb-time-to-relax-#{i + 1}")
       end
     end
+  end
+  
+  describe "querying" do
+    context "when slugged field exists" do
+      let!(:post) { Factory.create(:post, :title => "Test", :summary => "All the fucking time!") }
+    
+      it "should return the uniq slugged value" do
+        post.to_param.should eq("test-all-the-fucking-time")
+      end
       
+      it "should find by slug" do
+        Post.find("test-all-the-fucking-time").should eq(post)
+      end
+    end
+    
+    context "when slugged field not exists" do
+      let!(:post) { Factory.create(:post, :title => "", :summary => "") }
+    
+      it "should return the document id" do
+        post.to_param.should eq(post.id)
+      end
+      
+      it "should find by id" do
+        Post.find(post.id).should eq(post)
+      end
+    end
   end
   
 end
