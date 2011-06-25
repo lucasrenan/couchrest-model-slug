@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     couchrest_model_slug (0.0.1)
-      couchrest_model (= 1.1.0.rc1)
-      stringex (= 1.2.1)
+      couchrest_model (~> 1.1.0)
+      stringex (~> 1.2.1)
 
 GEM
   remote: http://rubygems.org/
@@ -50,13 +50,13 @@ GEM
     celerity (0.8.9)
     childprocess (0.1.9)
       ffi (~> 1.0.6)
-    couchrest (1.1.0.pre3)
+    couchrest (1.1.0)
       mime-types (~> 1.15)
       multi_json (~> 1.0.0)
       rest-client (~> 1.6.1)
-    couchrest_model (1.1.0.rc1)
+    couchrest_model (1.1.0)
       activemodel (~> 3.0)
-      couchrest (= 1.1.0.pre3)
+      couchrest (= 1.1.0)
       mime-types (~> 1.15)
       tzinfo (~> 0.3.22)
     culerity (0.2.15)
@@ -99,7 +99,7 @@ GEM
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.9.2)
-    rest-client (1.6.1)
+    rest-client (1.6.3)
       mime-types (>= 1.16)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
