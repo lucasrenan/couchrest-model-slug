@@ -9,7 +9,7 @@ Time to relax with beautiful urls.
 
 Add to Gemfile
 
-  gem "couchrest_model_slug", "~> 0.0.1"
+  gem "couchrest_model_slug", "~> 0.0.2"
   
 A model example
 
