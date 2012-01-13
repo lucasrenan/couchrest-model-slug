@@ -13,6 +13,6 @@ Gem::Specification.new do |s|
   
   s.require_paths = ["lib"]
 
-  s.add_dependency "couchrest_model", "~> 1.1.0"
-  s.add_dependency "stringex", "~> 1.2.1"
+  s.add_dependency "couchrest_model", "~> 1.1.2"
+  s.add_dependency "stringex", "~> 1.3"
 end
