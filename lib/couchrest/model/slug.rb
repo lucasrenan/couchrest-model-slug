@@ -22,27 +22,6 @@ module CouchRest
         cattr_accessor :slugged_props
       end
       
-      module InstanceMethods
-        def to_param
-          result = self.send :slug
-          return super if result.blank?
-          result
-        end
-        
-        private
-        def generate_slug
-          if new_record? || slugged_props_changed?
-            slug = self.slugged_props.collect{ |prop| read_attribute(prop) }.join(", ").to_url
-            slug = self.class.generate_count_for_slug(slug)
-            self.slug = slug
-          end
-        end
-
-        def slugged_props_changed?
-          self.slugged_props.any? { |p| self.send("#{p}_changed?") }
-        end
-      end
-      
       module ClassMethods
         def slug(*props)
           self.slugged_props = props.map(&:to_s)
@@ -56,6 +35,25 @@ module CouchRest
           hash = self.by_slug_without_count(:reduce => true, :group => true, :key => slug_without_count)["rows"].try(:first)
           hash.nil? ? slug_without_count : "#{slug_without_count}-#{hash['value']}"
         end
+      end
+
+      def to_param
+        result = self.send :slug
+        return super if result.blank?
+        result
+      end
+      
+      private
+      def generate_slug
+        if new_record? || slugged_props_changed?
+          slug = self.slugged_props.collect{ |prop| read_attribute(prop) }.join(", ").to_url
+          slug = self.class.generate_count_for_slug(slug)
+          self.slug = slug
+        end
+      end
+
+      def slugged_props_changed?
+        self.slugged_props.any? { |p| self.send("#{p}_changed?") }
       end
       
     end
