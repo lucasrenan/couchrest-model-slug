@@ -1,4 +1,4 @@
-== CouchRest Model Slug
+== CouchRest Model Slug {<img src="https://secure.travis-ci.org/lucasrenan/couchrest-model-slug.png?branch=master" alt="Build Status" />}[http://travis-ci.org/lucasrenan/couchrest-model-slug]
 
 CouchRest Model Slug is a simple gem to generate better urls using CouchRest Model in an easy way.
 It's based on Mongoid Slug https://github.com/papercavalier/mongoid-slug
